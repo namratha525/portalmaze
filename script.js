@@ -16,3 +16,6 @@ maze.forEach(row => {
     mazeDiv.appendChild(div);
   });
 });
+let playerRow = 0;
+let playerCol = 0;
+
