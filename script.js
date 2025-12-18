@@ -155,4 +155,15 @@ function shortestPathWithBreak(K) {
 }
 const optimalNoBreak = shortestPathNoBreak();
 const optimalWithBreak = shortestPathWithBreak(1);
+// ===== PHASE 7: INTERNAL SCORING DATA =====
+
+// Maximum walls allowed
+const K = 1;
+
+// Compute optimal paths (player never sees this)
+const optimalNoBreakPath = shortestPathNoBreak();
+const optimalWithBreakPath = shortestPathWithBreak(K);
+
+console.log("Optimal path (no break):", optimalNoBreakPath);
+console.log("Optimal path (with break):", optimalWithBreakPath);
 
