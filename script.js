@@ -18,7 +18,6 @@ maze.forEach(row => {
 });
 let playerRow = 0;
 let playerCol = 0;
-
 document.addEventListener("keydown", movePlayer);
 
 function movePlayer(e) {
@@ -38,4 +37,20 @@ function movePlayer(e) {
     playerCol = newCol;
   }
 }
+'R' // red portal
+if (maze[playerRow][playerCol] === 'R') {
+
+  // current portal position
+  const currentRow = playerRow;
+  const currentCol = playerCol;
+
+  // find the OTHER red portal
+  redPortals.forEach(portal => {
+    if (portal.row !== currentRow || portal.col !== currentCol) {
+      playerRow = portal.row;
+      playerCol = portal.col;
+    }
+  });
+}
+
 
