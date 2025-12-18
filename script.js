@@ -103,4 +103,54 @@ function shortestPathNoBreak() {
   return -1; // no path
 }
 
+function shortestPathWithBreak(K) {
+  const rows = maze.length;
+  const cols = maze[0].length;
+
+  let queue = [];
+  let visited = Array.from({ length: rows }, () =>
+    Array.from({ length: cols }, () =>
+      Array(K + 1).fill(false)
+    )
+  );
+
+  queue.push({ row: 0, col: 0, breaks: 0, steps: 0 });
+  visited[0][0][0] = true;
+
+  while (queue.length > 0) {
+    let { row, col, breaks, steps } = queue.shift();
+
+    if (maze[row][col] === 'G') {
+      return steps;
+    }
+
+    const directions = [
+      [1, 0],
+      [-1, 0],
+      [0, 1],
+      [0, -1]
+    ];
+
+    for (let [dr, dc] of directions) {
+      let nr = row + dr;
+      let nc = col + dc;
+
+      if (nr < 0 || nc < 0 || nr >= rows || nc >= cols) continue;
+
+      // Normal move
+      if (maze[nr][nc] !== '#' && !visited[nr][nc][breaks]) {
+        visited[nr][nc][breaks] = true;
+        queue.push({ row: nr, col: nc, breaks, steps: steps + 1 });
+      }
+
+      // Break wall
+      if (maze[nr][nc] === '#' && breaks < K && !visited[nr][nc][breaks + 1]) {
+        visited[nr][nc][breaks + 1] = true;
+        queue.push({ row: nr, col: nc, breaks: breaks + 1, steps: steps + 1 });
+      }
+    }
+  }
+
+  return -1;
+}
 
