@@ -153,4 +153,6 @@ function shortestPathWithBreak(K) {
 
   return -1;
 }
+const optimalNoBreak = shortestPathNoBreak();
+const optimalWithBreak = shortestPathWithBreak(1);
 
