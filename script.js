@@ -52,5 +52,11 @@ if (maze[playerRow][playerCol] === 'R') {
     }
   });
 }
+let breaksLeft = 1;
+
+if (e.shiftKey && maze[newRow][newCol] === '#') {
+  maze[newRow][newCol] = '.';
+  breaksLeft--;
+}
 
 
