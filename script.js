@@ -58,5 +58,49 @@ if (e.shiftKey && maze[newRow][newCol] === '#') {
   maze[newRow][newCol] = '.';
   breaksLeft--;
 }
+function shortestPathNoBreak() {
+  const rows = maze.length;
+  const cols = maze[0].length;
+
+  let queue = [];
+  let visited = Array.from({ length: rows }, () =>
+    Array(cols).fill(false)
+  );
+
+  queue.push({ row: 0, col: 0, steps: 0 });
+  visited[0][0] = true;
+
+  while (queue.length > 0) {
+    let { row, col, steps } = queue.shift();
+
+    if (maze[row][col] === 'G') {
+      return steps;
+    }
+
+    const directions = [
+      [1, 0],
+      [-1, 0],
+      [0, 1],
+      [0, -1]
+    ];
+
+    for (let [dr, dc] of directions) {
+      let nr = row + dr;
+      let nc = col + dc;
+
+      if (
+        nr >= 0 && nc >= 0 &&
+        nr < rows && nc < cols &&
+        !visited[nr][nc] &&
+        maze[nr][nc] !== '#'
+      ) {
+        visited[nr][nc] = true;
+        queue.push({ row: nr, col: nc, steps: steps + 1 });
+      }
+    }
+  }
+
+  return -1; // no path
+}
 
 
